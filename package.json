@@ -13,6 +13,8 @@
     "lint": "npm run lint:lit-analyzer && npm run lint:eslint",
     "lint:eslint": "eslint 'src/**/*.ts'",
     "lint:lit-analyzer": "lit-analyzer",
+    "i18n:extract": "lit-localize extract",
+    "i18n:build": "lit-localize build",
     "format": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path ./.eslintignore --write",
     "docs": "npm run docs:clean && npm run build && npm run analyze && npm run docs:build && npm run docs:assets && npm run docs:gen",
     "docs:clean": "rimraf docs",
@@ -36,12 +38,14 @@
   "author": "Google LLC",
   "license": "BSD-3-Clause",
   "dependencies": {
+    "@lit/localize": "^0.10.1",
     "lit": "^2.0.0-rc.1"
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
     "@esm-bundle/chai": "^4.1.5",
+    "@lit/localize-tools": "^0.3.2",
     "@open-wc/testing": "^2.5.32",
     "@open-wc/testing-karma": "^4.0.9",
     "@rollup/plugin-node-resolve": "^9.0.0",
