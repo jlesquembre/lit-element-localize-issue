@@ -6,13 +6,15 @@
 
 import {LitElement, html, css} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
+import {msg, configureLocalization} from '@lit/localize';
 
-/**
- * An example element.
- *
- * @slot - This element has a slot
- * @csspart button - The button
- */
+export const {setLocale} = configureLocalization({
+  sourceLocale: 'en',
+  targetLocales: ['es'],
+  loadLocale: (locale) => import(`/locales/${locale}.js`),
+});
+setLocale('en');
+
 @customElement('my-element')
 export class MyElement extends LitElement {
   static styles = css`
@@ -24,34 +26,33 @@ export class MyElement extends LitElement {
     }
   `;
 
-  /**
-   * The name to say "Hello" to.
-   */
-  @property()
-  name = 'World';
+  @property() name = 'John';
+  @property() surname = 'Doe';
+  @property() lang = 'en';
 
-  /**
-   * The number of times the button has been clicked.
-   */
-  @property({type: Number})
-  count = 0;
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener('lit-localize-status', (event) => {
+      if (event.detail.status === 'ready') {
+        console.log(`Loaded new locale: ${event.detail.readyLocale}`);
+        this.requestUpdate();
+      }
+    });
+  }
 
   render() {
-    return html`
-      <h1>Hello, ${this.name}!</h1>
-      <button @click=${this._onClick} part="button">
-        Click Count: ${this.count}
-      </button>
+    return msg(html`
+      <h1>Hello, ${this.name} ${this.surname}!</h1>
+      <div>Current language: ${this.lang}</div>
+      <button @click=${this._toogleLang} part="button">Toogle language</button>
       <slot></slot>
-    `;
+    `);
   }
 
-  private _onClick() {
-    this.count++;
-  }
-
-  foo(): string {
-    return 'foo';
+  private _toogleLang() {
+    if (this.lang === 'en') this.lang = 'es';
+    else this.lang = 'en';
+    setLocale(this.lang);
   }
 }
 

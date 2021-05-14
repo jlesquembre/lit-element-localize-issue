@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<file target-language="es" source-language="en" original="lit-localize-inputs" datatype="plaintext">
+<body>
+<trans-unit id="hee42ce2388b5d52a">
+  <source>
+      <ph id="0">&lt;h1></ph>Hello, <ph id="1">${this.name} ${this.surname}</ph>!<ph id="2">&lt;/h1>
+      &lt;div></ph>Current language: <ph id="3">${this.lang}&lt;/div>
+      &lt;button @click="${this._toogleLang}" part="button"></ph>Toogle language<ph id="4">&lt;/button>
+      &lt;slot>&lt;/slot>
+    </ph></source>
+  <target>
+      <ph id="0">&lt;h1></ph>Hola, <ph id="1">${this.name} ${this.surname}</ph>!<ph id="2">&lt;/h1>
+      &lt;div></ph>Idioma: <ph id="3">${this.lang}&lt;/div>
+      &lt;button @click="${this._toogleLang}" part="button"></ph>Cambiar idioma<ph id="4">&lt;/button>
+      &lt;slot>&lt;/slot>
+    </ph></target>
+</trans-unit>
+</body>
+</file>
+</xliff>
